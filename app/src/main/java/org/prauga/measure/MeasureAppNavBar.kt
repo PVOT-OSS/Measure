@@ -1,15 +1,13 @@
 package org.prauga.measure
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.prauga.pvot.designsystem.components.navigation.PvotNavBar
 import com.prauga.pvot.designsystem.components.navigation.PvotTabItem
@@ -34,24 +32,17 @@ fun MeasureAppNavBar() {
         )
     )
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        bottomBar = {
-            PvotNavBar(
-                selectedTab = selectedTab,
-                onTabClick = { selectedTab = it },
-                tabs = tabs
-            )
-        }
-    ) { innerPadding ->
-        val contentModifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding)
-            .background(MaterialTheme.colorScheme.background)
-
+    Box(modifier = Modifier.fillMaxSize()) {
         when (selectedTab) {
-            0 -> MeasureScreen(modifier = contentModifier)
-            1 -> LevelScreen(modifier = contentModifier)
+            0 -> MeasureScreen(modifier = Modifier.fillMaxSize())
+            1 -> LevelScreen(modifier = Modifier.fillMaxSize())
         }
+
+        PvotNavBar(
+            selectedTab = selectedTab,
+            onTabClick = { selectedTab = it },
+            tabs = tabs,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }
